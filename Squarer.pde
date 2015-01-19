@@ -21,12 +21,14 @@ class Squarer implements MovieMode {
   float   backgroundPulseRate;
 
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     //vBuff.stroke(MAXCOLOR);
     //vBuff.fill(MAXCOLOR);
     vBuff.strokeWeight(2);
     vBuff.smooth();
+    vBuff.endDraw();
     
     bEvens = true;
     flipLength = 0.1f;
@@ -67,6 +69,7 @@ class Squarer implements MovieMode {
           MAXCOLOR/2 * (sin(-1*backgroundPulse)*0.5 + 0.5f), 
           MAXCOLOR/2 * (sin(2.3*backgroundPulse + TWO_PI*2/3)*0.5 + 0.5f) 
           );
+    vBuff.beginDraw();
     vBuff.background(cColor);
     
     //vBuff.noSmooth();
@@ -115,17 +118,21 @@ class Squarer implements MovieMode {
     //arraySounder.setSpectrum( brightArray );
   
     vBuff.popMatrix();
+    vBuff.endDraw();
   }
 
   void draw() {
+    vBuff.beginDraw();
     //vBuff.fill(MAXCOLOR);
     //vBuff.rect(6, 5, 3, 2);
     vBuff.loadPixels();
+    
     for (int i = 0; i < PLEDWIDTH; i++ ) {
       for (int j = 0; j < PLEDHEIGHT; j++ ) {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

@@ -17,9 +17,11 @@ class MoviePlayer implements MovieMode {
   }
 
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, P2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.smooth();
     vBuff.colorMode(RGB, MAXCOLOR);
+    vBuff.endDraw();
     //vBuff.smooth();
     myMovie = new Movie(parent, movieFile);
     //myMovie = new Movie(parent, "station.mov");

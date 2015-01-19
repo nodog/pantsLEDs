@@ -1,6 +1,6 @@
 class Wavezer implements MovieMode {
   static final String MOVIEFILENAME = "wavezer.bin";
-  static final int NFRAMES = 1600;
+  static final int NFRAMES = 1800;
   static final int FRAMEDELAY = 5;
 
   float phi1;
@@ -16,12 +16,14 @@ class Wavezer implements MovieMode {
   PGraphics vBuff;
   
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, P3D);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     //vBuff.stroke(MAXCOLOR);
     //vBuff.fill(MAXCOLOR);
     vBuff.strokeWeight(2);
     vBuff.smooth();
+    vBuff.endDraw();
 
     modScale1 = 40;
     modPhi1 = 0;
@@ -34,6 +36,7 @@ class Wavezer implements MovieMode {
   }
   
   void update() { 
+    vBuff.beginDraw();
     vBuff.background( 0 );
                 
     modPhi1 = modPhi1 + modPhiFreq1 / frameRate; 
@@ -66,19 +69,22 @@ class Wavezer implements MovieMode {
 
       vBuff.stroke(0, 0, MAXCOLOR);    
       vBuff.line(x, (int) y3 + eqOffset, x + 1, (int) y4 + eqOffset);
- 
+    
     }
+    vBuff.endDraw();
   }
 
   void draw() {
     //vBuff.fill(MAXCOLOR);
     //vBuff.rect(6, 5, 3, 2);
+    vBuff.beginDraw();
     vBuff.loadPixels();
     for (int i = 0; i < PLEDWIDTH; i++ ) {
       for (int j = 0; j < PLEDHEIGHT; j++ ) {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

@@ -14,20 +14,20 @@
 
 import java.awt.Color;
 
-// contstants
-final static int MODE = 22;
+// contstant
+final static int MODE = 10;
 final static boolean HSYMMETRY = false;
 final static boolean GATEMODE = false;
 final static boolean SPACED = false;
-final static int PLEDWIDTH = 15; // 72 for gate mode + spaced, 48 !gate + spaced, 15 for !gate + !spaced 
+final static int PLEDWIDTH = 35; // 72 for gate mode + spaced, 48 !gate + spaced, 15 for !gate + !spaced 
 final static boolean BLUEGLITCH = false;
 final static int NBLUEGLITCHES = 50;
 final static boolean FASTRENDER = false;
-final static int PLEDPIXMULT = 53;
+final static int PLEDPIXMULT = 22;
 final static int COLORTHEME = 7;
 final static int MAXCOLORTHEME = 20;
-final static boolean MOVIEWRITE = false;
-final static int PLEDHEIGHT = 10;
+final static boolean MOVIEWRITE = true;
+final static int PLEDHEIGHT = 30;
 final static int NRGB = 3;
 final static int MAXCOLOR = 255;
 final static int TWOMAXCOLOR = 2*MAXCOLOR;

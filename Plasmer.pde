@@ -18,12 +18,14 @@ class Plasmer implements MovieMode {
   PGraphics vBuff;
   
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     //vBuff.stroke(MAXCOLOR);
     //vBuff.fill(MAXCOLOR);
     //vBuff.strokeWeight(2);
     vBuff.smooth();
+    vBuff.endDraw();
 
     ft = random( 2 );
     f1 = random( 1 );
@@ -52,7 +54,8 @@ class Plasmer implements MovieMode {
   
   void update() { 
     timeDisplacement = frameCount;
-    
+
+    vBuff.beginDraw();
     vBuff.loadPixels();
   
     vBuff.fill(0, 16);
@@ -78,17 +81,20 @@ class Plasmer implements MovieMode {
       }
     }   
     vBuff.updatePixels();
+    vBuff.endDraw();
   }
 
   void draw() {
     //vBuff.fill(MAXCOLOR);
     //vBuff.rect(6, 5, 3, 2);
+    vBuff.beginDraw();
     vBuff.loadPixels();
     for (int i = 0; i < PLEDWIDTH; i++ ) {
       for (int j = 0; j < PLEDHEIGHT; j++ ) {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

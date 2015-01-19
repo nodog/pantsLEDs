@@ -1,6 +1,6 @@
 public class Fireflier implements MovieMode {
   static final String MOVIEFILENAME = "frflys2.bin";
-  static final int NFRAMES = 8000;
+  static final int NFRAMES = 1000;
   static final int FRAMEDELAY = 6;
   static final int NFLIES = 25;
   static final int FADEALPHA = MAXCOLOR/16;
@@ -10,10 +10,12 @@ public class Fireflier implements MovieMode {
   int flyColorTheme;
   
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     vBuff.noSmooth();
     vBuff.ellipseMode(CENTER);
+    vBuff.endDraw();
 
     flyColorTheme = (int) random(MAXCOLORTHEME) + 1;
     for (int i = 0; i < NFLIES; i++) {
@@ -35,6 +37,7 @@ public class Fireflier implements MovieMode {
   }
   
   void draw() {
+    vBuff.beginDraw();
     vBuff.fill(0, 0, 0, FADEALPHA);
     //vBuff.fill(0);
     vBuff.noStroke();
@@ -51,6 +54,7 @@ public class Fireflier implements MovieMode {
         pantsLEDs[i][j] = vBuff.pixels[iGray(i, j)];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

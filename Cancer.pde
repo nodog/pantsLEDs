@@ -1,6 +1,6 @@
 class Cancer implements MovieMode {
   static final String DEFAULTMOVIEFILENAME = "cancerb1.bin";
-  static final int NFRAMES = 3000;
+  static final int NFRAMES = 1000;
   static final int FRAMEDELAY = 5;
   static final int NHISTORY = 99;
 
@@ -28,10 +28,12 @@ class Cancer implements MovieMode {
   }
  
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     vBuff.strokeWeight(1.0);
     vBuff.smooth();
+    vBuff.endDraw();
 
     currentCount = 0; 
     currentWriteFrame = 0; 
@@ -103,8 +105,8 @@ class Cancer implements MovieMode {
       }
     }
     
+    vBuff.beginDraw();
     vBuff.loadPixels();
-
     if( currentCount < NHISTORY ) {
       currentReadFrameOffset = 0;
     } else if ( random( 0.0, 1.0 ) < 0.1 ) {
@@ -118,17 +120,20 @@ class Cancer implements MovieMode {
     }
    
     vBuff.updatePixels();
+    vBuff.endDraw();
   }
 
   void draw() {
     //vBuff.fill(MAXCOLOR);
     //vBuff.rect(6, 5, 3, 2);
+    vBuff.beginDraw();
     vBuff.loadPixels();
     for (int i = 0; i < PLEDWIDTH; i++ ) {
       for (int j = 0; j < PLEDHEIGHT; j++ ) {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

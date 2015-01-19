@@ -1,6 +1,6 @@
 class Zoomer implements MovieMode {
   static final String MOVIEFILENAME = "zoomer2.bin";
-  static final int NFRAMES = 8000;
+  static final int NFRAMES = 100;
   static final int FRAMEDELAY = 2;
   static final int ZOOMMODE = 0;
   static final float MAXGLITCHCHANCE = 0;

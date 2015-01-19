@@ -11,9 +11,11 @@ class KittPulser implements MovieMode {
   color[] colors = new color[NCOLORS]; 
 
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     vBuff.smooth();
+    vBuff.endDraw();
     
     if (SPACED) {
       for (int i = 0; i < PLEDWIDTH / 2; i++) {
@@ -37,6 +39,7 @@ class KittPulser implements MovieMode {
   }
 
   void draw() {
+    vBuff.beginDraw();
     vBuff.fill(0, 0, 0, FADEALPHA);
     vBuff.rect(0, 0, PLEDWIDTH, PLEDHEIGHT);
 
@@ -51,7 +54,7 @@ class KittPulser implements MovieMode {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
- 
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

@@ -20,12 +20,14 @@ class Fireworker implements MovieMode {
   float timeUntilNextWork;
   
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     //vBuff.stroke(MAXCOLOR);
     //vBuff.fill(MAXCOLOR);
     //vBuff.strokeWeight(2);
     vBuff.smooth();
+    vBuff.endDraw();
     
     works = new ArrayList<Work>();
     timeUntilNextWork = 0;
@@ -33,7 +35,9 @@ class Fireworker implements MovieMode {
 
   void drawWorkParticle( Work w, float d, float th ) {
     th += random( -0.2, 0.2 );
+    vBuff.beginDraw();
     vBuff.ellipse( w.pos.x + cos(th)*d, w.pos.y + sin(th)*d, w.sz, w.sz );
+    vBuff.endDraw();
   }
   
   void update() { 
@@ -50,6 +54,7 @@ class Fireworker implements MovieMode {
       timeUntilNextWork = random( 0.25f, 1.25f );
     }
   
+    vBuff.beginDraw();
     vBuff.noStroke();
     vBuff.fill( 0.0, 16 );
     vBuff.rect( 0, 0, PLEDWIDTH, PLEDHEIGHT );
@@ -76,15 +81,18 @@ class Fireworker implements MovieMode {
         --i;
       }
     }
+    vBuff.endDraw();
   }
 
   void draw() {
+    vBuff.beginDraw();
     vBuff.loadPixels();
     for (int i = 0; i < PLEDWIDTH; i++ ) {
       for (int j = 0; j < PLEDHEIGHT; j++ ) {
         pantsLEDs[i][j] = vBuff.pixels[j*PLEDWIDTH + i];
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {

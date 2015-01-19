@@ -21,9 +21,11 @@ class Imaginer implements MovieMode {
   }
 
   void setup() {
-    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT, JAVA2D);
+    vBuff = createGraphics(PLEDWIDTH, PLEDHEIGHT);
+    vBuff.beginDraw();
     vBuff.colorMode(HSB, MAXCOLOR);
     vBuff.smooth();
+    vBuff.endDraw();
     dx = 0;
     dy = 0;
     maxDX = 2*img.width - PLEDWIDTH;
@@ -46,11 +48,14 @@ class Imaginer implements MovieMode {
 
     dx = maxDX / 2 * sin(TWO_PI * (fdx * t + phix)) + maxDX / 2;
     dy = maxDY / 2 * sin(TWO_PI * (fdy * t + phiy)) + maxDY / 2;
-    vBuff.image(img, -dx, -dy, 2*img.width, 2*img.height); 
+    vBuff.beginDraw();
+    vBuff.image(img, -dx, -dy, 2*img.width, 2*img.height);
+    vBuff.endDraw(); 
   }
 
   void draw() {
     float phic = MAXCOLOR / 2 * sin(TWO_PI * fphic * t) + MAXCOLOR / 2; 
+    vBuff.beginDraw();
     vBuff.colorMode(RGB, MAXCOLOR);
     vBuff.loadPixels();
     for (int i = 0; i < PLEDWIDTH; i++ ) {
@@ -66,6 +71,7 @@ class Imaginer implements MovieMode {
         pantsLEDs[i][j] = color(rgbVals[0], rgbVals[1], rgbVals[2]);
       }
     }
+    vBuff.endDraw();
   }
 
   String getMovieFileName() {
